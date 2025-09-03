@@ -14,13 +14,81 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          created_at: string
+          id: string
+          updated_at: string
+          user_id: string
+          username: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+          username?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
+      screenshots: {
+        Row: {
+          file_path: string
+          file_size: number | null
+          filename: string
+          id: string
+          is_public: boolean | null
+          mime_type: string | null
+          original_name: string | null
+          short_code: string
+          upload_date: string
+          user_id: string
+          view_count: number | null
+        }
+        Insert: {
+          file_path: string
+          file_size?: number | null
+          filename: string
+          id?: string
+          is_public?: boolean | null
+          mime_type?: string | null
+          original_name?: string | null
+          short_code: string
+          upload_date?: string
+          user_id: string
+          view_count?: number | null
+        }
+        Update: {
+          file_path?: string
+          file_size?: number | null
+          filename?: string
+          id?: string
+          is_public?: boolean | null
+          mime_type?: string | null
+          original_name?: string | null
+          short_code?: string
+          upload_date?: string
+          user_id?: string
+          view_count?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_short_code: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
