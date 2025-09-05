@@ -47,14 +47,13 @@ const Index = () => {
       <main className="container mx-auto px-4 py-12">
         <div className="text-center space-y-8 mb-16 animate-fade-in">
           <h2 className="text-5xl md:text-7xl font-bold tracking-tight">
-            <span className="bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent">
-              Screenshot hosting
+            <span className="bg-[image:var(--gradient-fire)] bg-clip-text text-transparent">
+              Hosting privat
             </span>
-            <span className="block text-foreground mt-2">ultra-privat</span>
+            <span className="block text-foreground mt-2">ultra-securizat</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Platformă exclusivă pentru hosting securizat de imagini cu linkuri personalizate.
-            Acces restricționat și control complet asupra conținutului tău.
+            Salut myth3x, aici sunt toate pozele tale. Pentru a le vedea trebuie să te loghezi în platformă.
           </p>
         </div>
 

@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
+import { Flame, Lock } from 'lucide-react';
 
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,14 +30,14 @@ const Auth = () => {
     if (error) {
       setError(error.message);
       toast({
-        title: "Eroare la autentificare",
-        description: error.message,
+        title: "Acces refuzat",
+        description: "Credențiale incorecte sau cont neautorizat",
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Autentificare reușită",
-        description: "Bun venit înapoi!",
+        title: "Acces acordat",
+        description: "Bun venit în platformă!",
       });
       navigate('/dashboard');
     }
@@ -81,97 +81,62 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-[image:var(--gradient-bg)] p-4">
+      <Card className="w-full max-w-md bg-[image:var(--gradient-card)] border-primary/20 shadow-[var(--shadow-elegant)]">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">myth3x.pics</CardTitle>
-          <CardDescription>
-            Platforma ta de screenshot sharing
+          <div className="mx-auto mb-4 relative">
+            <Flame className="h-16 w-16 text-primary animate-glow" />
+          </div>
+          <CardTitle className="text-3xl font-bold bg-[image:var(--gradient-fire)] bg-clip-text text-transparent">
+            myth3x.pics
+          </CardTitle>
+          <CardDescription className="text-lg">
+            Acces privat la platformă
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="signin" className="space-y-4">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">Conectează-te</TabsTrigger>
-              <TabsTrigger value="signup">Înregistrează-te</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="signin">
-              <form onSubmit={handleSignIn} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signin-email">Email</Label>
-                  <Input
-                    id="signin-email"
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="numele@exemplu.com"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signin-password">Parolă</Label>
-                  <Input
-                    id="signin-password"
-                    name="password"
-                    type="password"
-                    required
-                    placeholder="Parola ta"
-                  />
-                </div>
-                {error && (
-                  <Alert variant="destructive">
-                    <AlertDescription>{error}</AlertDescription>
-                  </Alert>
-                )}
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Se conectează...' : 'Conectează-te'}
-                </Button>
-              </form>
-            </TabsContent>
-            
-            <TabsContent value="signup">
-              <form onSubmit={handleSignUp} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signup-username">Nume utilizator</Label>
-                  <Input
-                    id="signup-username"
-                    name="username"
-                    type="text"
-                    required
-                    placeholder="myth3x_user"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
-                  <Input
-                    id="signup-email"
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="numele@exemplu.com"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-password">Parolă</Label>
-                  <Input
-                    id="signup-password"
-                    name="password"
-                    type="password"
-                    required
-                    placeholder="Minim 6 caractere"
-                  />
-                </div>
-                {error && (
-                  <Alert variant="destructive">
-                    <AlertDescription>{error}</AlertDescription>
-                  </Alert>
-                )}
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Se înregistrează...' : 'Înregistrează-te'}
-                </Button>
-              </form>
-            </TabsContent>
-          </Tabs>
+          <form onSubmit={handleSignIn} className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="signin-email" className="flex items-center gap-2">
+                <Lock className="h-4 w-4" />
+                Email autorizat
+              </Label>
+              <Input
+                id="signin-email"
+                name="email"
+                type="email"
+                required
+                placeholder="email@authorized.com"
+                className="bg-background/80"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="signin-password">Parolă</Label>
+              <Input
+                id="signin-password"
+                name="password"
+                type="password"
+                required
+                placeholder="Parola de acces"
+                className="bg-background/80"
+              />
+            </div>
+            {error && (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            <Button 
+              type="submit" 
+              className="w-full bg-[image:var(--gradient-fire)] hover:scale-105 transition-transform" 
+              disabled={isLoading}
+            >
+              {isLoading ? 'Se verifică accesul...' : 'Accesează platforma'}
+            </Button>
+          </form>
+          <div className="mt-6 text-center text-sm text-muted-foreground">
+            Doar utilizatorii autorizați au acces la această platformă privată
+          </div>
         </CardContent>
       </Card>
     </div>
